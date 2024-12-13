@@ -1,8 +1,11 @@
 import express from "express";
 import bodyParser from "body-parser";
 
+
 const app = express();
 const port = 3000;
+
+
 
 //Step 3 - Make the styling show up.
 //Hint 1: CSS files are static files!
@@ -13,12 +16,29 @@ const port = 3000;
 //Hint: Google to find out how to get the current year using JS.
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("public"));
+
+
+function randomNameGenerator(list1, list2) {
+
+  const random1 = Math.floor(Math.random() * list1.length);
+  const random2 = Math.floor(Math.random() * list2.length);
+  return list1[random1] + " " + list2[random2];
+
+}
+
 
 app.get("/", (req, res) => {
   //Step 1 - Make the get route work and render the index.ejs file.
+  res.render("index.ejs")
+
 });
 
 app.post("/submit", (req, res) => {
+
+  res.render("index.ejs", {
+    nickName: randomNameGenerator(adj, noun)
+  })
   //Step 2 - Make the generate name functionality work
   //Hint: When the "Generate Name" button in index.ejs is clicked, it should hit up this route.
   //Then:
